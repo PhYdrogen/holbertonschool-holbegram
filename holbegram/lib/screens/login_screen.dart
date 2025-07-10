@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holbegram/screens/home.dart';
 import 'package:holbegram/screens/pages/feed.dart';
 import 'package:holbegram/widgets/text_field.dart';
 import 'package:holbegram/screens/signup_screen.dart';
@@ -34,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (res == 'success' && context.mounted) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => Feed(),
+          builder: (context) => Home(),
         ),
       );
     } else {
