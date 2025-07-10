@@ -76,4 +76,8 @@ class AuthMethode {
         await _firestore.collection('users').doc(currentUser.uid).get();
     return Users.fromSnap(snap);
   }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
 }
