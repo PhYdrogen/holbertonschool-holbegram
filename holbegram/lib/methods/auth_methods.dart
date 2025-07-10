@@ -42,7 +42,6 @@ class AuthMethode {
             .createUserWithEmailAndPassword(email: email, password: password);
         User? user = userCredential.user;
 
-        // TODO: Implement image upload to Cloudinary and get photoUrl
         String photoUrl = ''; // Placeholder for now
 
         Users newUser = Users(

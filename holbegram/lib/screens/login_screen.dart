@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holbegram/screens/pages/feed.dart';
 import 'package:holbegram/widgets/text_field.dart';
 import 'package:holbegram/screens/signup_screen.dart';
 import 'package:holbegram/methods/auth_methods.dart';
@@ -30,8 +31,12 @@ class _LoginScreenState extends State<LoginScreen> {
       password: widget.passwordController.text,
     );
 
-    if (res == 'success') {
-      // Navigate to home screen
+    if (res == 'success' && context.mounted) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => Feed(),
+        ),
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

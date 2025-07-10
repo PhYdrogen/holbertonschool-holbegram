@@ -3,6 +3,8 @@ import 'package:holbegram/widgets/text_field.dart';
 import 'package:holbegram/screens/login_screen.dart';
 import 'package:holbegram/screens/auth/upload_image_screen.dart';
 
+import '../methods/auth_methods.dart';
+
 class SignUp extends StatefulWidget {
   final TextEditingController emailController;
   final TextEditingController usernameController;
@@ -56,7 +58,7 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             Image.asset(
-              'lib/assets/images/logo.webp',
+              'assets/images/logo.webp',
               width: 80,
               height: 60,
             ),
@@ -125,26 +127,34 @@ class _SignUpState extends State<SignUp> {
             SizedBox(
               height: 48,
               width: double.infinity,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(
-                    Color.fromARGB(218, 226, 37, 24),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => AddPicture(
-                        email: widget.emailController.text,
-                        username: widget.usernameController.text,
-                        password: widget.passwordController.text,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                  );
-                },
-                child: Text(
-                  'Sign Up',
-                  style: TextStyle(color: Colors.white),
+                    backgroundColor: WidgetStateProperty.all(
+                      Color.fromARGB(218, 226, 37, 24),
+                    ),
+                  ),
+                  onPressed: () async {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => AddPicture(
+                          email: widget.emailController.text,
+                          username: widget.usernameController.text,
+                          password: widget.passwordController.text,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ),

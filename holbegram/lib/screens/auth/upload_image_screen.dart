@@ -58,37 +58,36 @@ class _AddPictureState extends State<AddPicture> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Picture'),
-        actions: [
-          TextButton(
-            onPressed: () async {
-              String res = await AuthMethode().signUpUser(
-                email: widget.email,
-                password: widget.password,
-                username: widget.username,
-                file: _image,
-              );
-              if (res == 'success') {
-                showSnackBar('Sign up successful!', context);
-              } else {
-                showSnackBar(res, context);
-              }
-            },
-            child: const Text(
-              'Next',
-              style: TextStyle(
-                color: Colors.blueAccent,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ],
-      ),
       body: Center(
         child: Column(
           children: [
+            SizedBox(height: 28),
+            Text(
+              'Holbegram',
+              style: TextStyle(
+                fontFamily: 'Billabong',
+                fontSize: 50,
+              ),
+            ),
+            Image.asset(
+              'assets/images/logo.webp',
+              width: 80,
+              height: 60,
+            ),
+            SizedBox(height: 20),
+            Text(
+              "Hello, ${widget.username} Welcome to Holbegram.",
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            Text(
+              "Choose an image from your gallery or take a new one.",
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
+            SizedBox(height: 20),
             Stack(
               children: [
                 _image != null
@@ -112,14 +111,6 @@ class _AddPictureState extends State<AddPicture> {
               ],
             ),
             SizedBox(height: 20),
-            Text(
-              widget.username, // Display the passed username
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -132,6 +123,39 @@ class _AddPictureState extends State<AddPicture> {
                   onPressed: selectImageFromGallery,
                 ),
               ],
+            ),
+            TextButton(
+              style: ButtonStyle(
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                backgroundColor: WidgetStateProperty.all(
+                  Color.fromARGB(218, 226, 37, 24),
+                ),
+              ),
+              onPressed: () async {
+                String res = await AuthMethode().signUpUser(
+                  email: widget.email,
+                  password: widget.password,
+                  username: widget.username,
+                  file: _image,
+                );
+                if (res == 'success') {
+                  showSnackBar('Sign up successful!', context);
+                } else {
+                  showSnackBar(res, context);
+                }
+              },
+              child: const Text(
+                'Next',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
             ),
           ],
         ),
