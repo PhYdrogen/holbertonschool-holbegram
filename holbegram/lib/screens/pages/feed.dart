@@ -13,7 +13,8 @@ class Feed extends StatelessWidget {
         centerTitle: false,
         title: Text(
           'Holbegram',
-          style: GoogleFonts.billabong(
+          style: const TextStyle(
+            fontFamily: 'Billabong',
             color: Colors.black,
             fontSize: 32,
           ),
