@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Image.asset(
-              'lib/assets/images/logo.webp',
+              'assets/images/logo.webp',
               width: 80,
               height: 60,
             ),
@@ -116,21 +116,29 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 48,
               width: double.infinity,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(
-                    Color.fromARGB(218, 226, 37, 24),
-                  ),
-                ),
-                onPressed: loginUser,
-                child: _isLoading
-                    ? const CircularProgressIndicator(
-                        color: Colors.white,
-                      )
-                    : const Text(
-                        'Log in',
-                        style: TextStyle(color: Colors.white),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
+                    ),
+                    backgroundColor: WidgetStateProperty.all(
+                      Color.fromARGB(218, 226, 37, 24),
+                    ),
+                  ),
+                  onPressed: loginUser,
+                  child: _isLoading
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : const Text(
+                          'Log in',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                ),
               ),
             ),
             SizedBox(height: 24),
