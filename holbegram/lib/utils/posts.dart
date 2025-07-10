@@ -21,6 +21,11 @@ class Posts extends StatelessWidget {
             child: Text('Error: ${snapshot.error}'),
           );
         }
+        if (snapshot.hasData && snapshot.data!.docs.length == 0) {
+          return Center(
+            child: Text('No posts found'),
+          );
+        }
         return ListView.builder(
           itemCount: snapshot.data!.docs.length,
           itemBuilder: (context, index) {

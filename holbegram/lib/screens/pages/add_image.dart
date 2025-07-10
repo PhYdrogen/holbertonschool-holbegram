@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:holbegram/methods/auth_methods.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:typed_data';
 import 'package:provider/provider.dart';
@@ -17,11 +20,27 @@ class _AddImageState extends State<AddImage> {
   Uint8List? _image;
   final TextEditingController _captionController = TextEditingController();
   bool _isLoading = false;
+  DocumentSnapshot? user;
+
+  @override
+  void initState() {
+    super.initState();
+    userInfo();
+  }
 
   @override
   void dispose() {
     super.dispose();
     _captionController.dispose();
+  }
+
+  Future<void> userInfo() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    FirebaseFirestore ff = FirebaseFirestore.instance;
+    var u = await ff.collection('users').doc(auth.currentUser?.uid).get();
+    setState(()  {
+      user = u;
+    });
   }
 
   void selectImage() async {
@@ -133,8 +152,6 @@ class _AddImageState extends State<AddImage> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -147,17 +164,17 @@ class _AddImageState extends State<AddImage> {
         actions: [
           TextButton(
             onPressed: () => postImage(
-              userProvider.getUser.uid,
-              userProvider.getUser.username,
-              userProvider.getUser.photoUrl,
+              user?["uid"],
+              user?["username"],
+              user?["photoUrl"],
             ),
             child: const Text(
               'Post',
               style: TextStyle(
-                color: Colors.blueAccent,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                  fontFamily: 'Billabong'),
             ),
           ),
         ],
