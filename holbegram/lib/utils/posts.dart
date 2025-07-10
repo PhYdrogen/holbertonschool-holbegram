@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:holbegram/screens/pages/methods/post_storage.dart';
 
 class Posts extends StatefulWidget {
   const Posts({Key? key}) : super(key: key);
@@ -67,7 +68,10 @@ class _PostsState extends State<Posts> {
                         ),
                         IconButton(
                           icon: const Icon(Icons.more_vert),
-                          onPressed: () {
+                          onPressed: () async {
+                            PostStorage postStorage = PostStorage();
+                            await postStorage.deletePost(
+                                post['postId'], post['publicId']);
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text('Post Deleted'),
