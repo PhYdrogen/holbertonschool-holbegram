@@ -3,7 +3,13 @@ import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+      options: FirebaseOptions(
+          apiKey: "AIzaSyBla-Egpuhcu5OY0Usc0_mlQoVnLxSETrs",
+          appId: "1:370075037595:android:640c02525908e7c4cebb3e",
+          messagingSenderId: "370075037595",
+          projectId: "holbegram-6d805",
+          storageBucket: "holbegram-6d805.firebasestorage.app"));
   runApp(const MyApp());
 }
 
