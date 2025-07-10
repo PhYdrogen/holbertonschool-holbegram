@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:holbegram/widgets/text_field.dart';
 import 'package:holbegram/screens/signup_screen.dart';
+import 'package:holbegram/methods/auth_methods.dart';
 
 class LoginScreen extends StatefulWidget {
   final TextEditingController emailController;
@@ -18,6 +19,30 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   late bool _passwordVisible;
+  bool _isLoading = false;
+
+  void loginUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await AuthMethode().login(
+      email: widget.emailController.text,
+      password: widget.passwordController.text,
+    );
+
+    if (res == 'success') {
+      // Navigate to home screen
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(res),
+        ),
+      );
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   @override
   void initState() {
@@ -97,11 +122,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     Color.fromARGB(218, 226, 37, 24),
                   ),
                 ),
-                onPressed: () {},
-                child: Text(
-                  'Log in',
-                  style: TextStyle(color: Colors.white),
-                ),
+                onPressed: loginUser,
+                child: _isLoading
+                    ? const CircularProgressIndicator(
+                        color: Colors.white,
+                      )
+                    : const Text(
+                        'Log in',
+                        style: TextStyle(color: Colors.white),
+                      ),
               ),
             ),
             SizedBox(height: 24),
